@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusConnect | Student Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <a href="#" class="logo" onclick="showPage('home')">
+        <span class="logo-icon">CC</span>
+        <span>Campus<span class="green">Connect</span></span>
+    </a>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+    <nav id="navMenu">
+        <a href="#" onclick="showPage('home')">Home</a>
+        <a href="#" onclick="showPage('browse')">Lost & Found</a>
+        <a href="#" onclick="showPage('help')">Get Help</a>
+        <a href="#" onclick="showPage('reports')">My Reports</a>
+    </nav>
+
+    <div class="nav-buttons">
+        <button class="btn light-btn" id="loginNav" onclick="showPage('login')">Login</button>
+        <button class="btn primary-btn" id="registerNav" onclick="showPage('register')">Register</button>
+        <button class="btn light-btn hidden" id="logoutNav" onclick="logout()">Logout</button>
+    </div>
+</header>
+
+<main>
+
+<!-- HOME PAGE -->
+<section id="home" class="page active">
+
+    <div class="hero">
+        <div class="hero-content">
+            <span class="tag">WELCOME TO YOUR CAMPUS COMMUNITY</span>
+
+            <h1>
+                Lost Something?<br>
+                <span>Found Something?</span><br>
+                We're Here To Help.
+            </h1>
+
+            <p>
+                CampusConnect makes it easy for students to report
+                lost belongings, find missing items and get help
+                with campus facilities.
+            </p>
+
+            <div class="hero-buttons">
+                <button class="btn primary-btn" onclick="checkLogin('report')">
+                    + Report An Item
+                </button>
+
+                <button class="btn outline-btn" onclick="showPage('browse')">
+                    Browse Items
+                </button>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <div class="circle circle1"></div>
+            <div class="circle circle2"></div>
+            <div class="bag">🎒</div>
+            <div class="floating-card card-one">🔑 Keys Found</div>
+            <div class="floating-card card-two">📱 Phone Returned</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">
+            <span class="tag">OUR SERVICES</span>
+            <h2>Campus Support Made Simple</h2>
+            <p>Everything students need in one place.</p>
+        </div>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Find Lost Items</h3>
+                <p>Search for your missing belongings using our campus platform.</p>
+                <button class="text-btn" onclick="showPage('browse')">Explore Items →</button>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📦</div>
+                <h3>Report Found Items</h3>
+                <p>Help other students by reporting belongings you have found.</p>
+                <button class="text-btn" onclick="checkLogin('report')">Report Item →</button>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Campus Help</h3>
+                <p>Submit complaints about Wi-Fi, classrooms and college facilities.</p>
+                <button class="text-btn" onclick="checkLogin('help')">Get Help →</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="stats">
+        <div><h2 id="totalItems">0</h2><p>Item Reports</p></div>
+        <div><h2 id="totalFound">0</h2><p>Found Items</p></div>
+        <div><h2 id="totalReturned">0</h2><p>Items Returned</p></div>
+        <div><h2 id="totalHelp">0</h2><p>Help Requests</p></div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">
+            <span class="tag">HOW IT WORKS</span>
+            <h2>Three Simple Steps</h2>
+        </div>
+
+        <div class="steps">
+            <div class="step">
+                <span>01</span>
+                <h3>Report or Search</h3>
+                <p>Post a lost/found item or search existing reports.</p>
+            </div>
+
+            <div class="step">
+                <span>02</span>
+                <h3>Connect</h3>
+                <p>Find the matching report and connect with its reporter.</p>
+            </div>
+
+            <div class="step">
+                <span>03</span>
+                <h3>Get It Back</h3>
+                <p>Update the report after the item is returned.</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- LOGIN PAGE -->
+<section id="login" class="page auth-page">
+
+    <div class="auth-box">
+        <div class="auth-left">
+            <div class="logo-icon">CC</div>
+            <h2>Welcome Back!</h2>
+            <p>Connect with your campus community.</p>
+            <h4>✓ Find lost belongings</h4>
+            <h4>✓ Report found items</h4>
+            <h4>✓ Get campus support</h4>
+        </div>
+
+        <div class="auth-right">
+            <h2>Login to Account</h2>
+            <p class="muted">Enter your details to continue.</p>
+
+            <form id="loginForm">
+                <label>Email Address</label>
+                <input type="email" id="loginEmail" required placeholder="Enter email">
+
+                <label>Password</label>
+                <input type="password" id="loginPassword" required placeholder="Enter password">
+
+                <button class="btn primary-btn full-btn">Login</button>
+            </form>
+
+            <p class="auth-link">
+                Don't have an account?
+                <a href="#" onclick="showPage('register')">Register</a>
+            </p>
+
+            <p class="demo-info">
+                Demo student: student@campus.com<br>
+                Password: 12345
+            </p>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- REGISTER PAGE -->
+<section id="register" class="page auth-page">
+
+    <div class="form-box">
+        <h2>Create Your Account</h2>
+        <p class="muted">Join the CampusConnect community.</p>
+
+        <form id="registerForm">
+
+            <label>Full Name</label>
+            <input type="text" id="regName" required placeholder="Enter full name">
+
+            <label>Email Address</label>
+            <input type="email" id="regEmail" required placeholder="Enter email">
+
+            <label>Password</label>
+            <input type="password" id="regPassword" required minlength="5" placeholder="Create password">
+
+            <label>Confirm Password</label>
+            <input type="password" id="regConfirm" required placeholder="Confirm password">
+
+            <button class="btn primary-btn full-btn">Create Account</button>
+
+        </form>
+
+        <p class="auth-link">
+            Already registered?
+            <a href="#" onclick="showPage('login')">Login</a>
+        </p>
+    </div>
+
+</section>
+
+
+<!-- STUDENT DASHBOARD -->
+<section id="dashboard" class="page">
+
+    <div class="page-heading">
+        <div>
+            <span class="tag">STUDENT PORTAL</span>
+            <h1 id="welcomeName">Welcome Student!</h1>
+            <p>Manage your campus activities.</p>
+        </div>
+
+        <button class="btn primary-btn" onclick="showPage('report')">
+            + New Report
+        </button>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <span>📋</span>
+            <h2 id="myTotal">0</h2>
+            <p>My Reports</p>
+        </div>
+
+        <div class="dashboard-card">
+            <span>📦</span>
+            <h2 id="myFound">0</h2>
+            <p>Found Items</p>
+        </div>
+
+        <div class="dashboard-card">
+            <span>💬</span>
+            <h2 id="myHelp">0</h2>
+            <p>Help Requests</p>
+        </div>
+
+        <div class="dashboard-card">
+            <span>✓</span>
+            <h2 id="myResolved">0</h2>
+            <p>Resolved</p>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2>Recent Activity</h2>
+        <div id="recentActivity">No activity available.</div>
+    </div>
+
+</section>
+
+
+<!-- REPORT ITEM PAGE -->
+<section id="report" class="page">
+
+    <div class="page-heading">
+        <div>
+            <span class="tag">LOST AND FOUND</span>
+            <h1>Report An Item</h1>
+            <p>Help someone find their missing belongings.</p>
+        </div>
+    </div>
+
+    <div class="form-layout">
+
+        <form id="itemForm" class="panel">
+
+            <h2>Item Information</h2>
+
+            <label>Report Type</label>
+            <select id="reportType" required>
+                <option value="Lost">I Lost An Item</option>
+                <option value="Found">I Found An Item</option>
+            </select>
+
+            <label>Item Name</label>
+            <input type="text" id="itemName" required placeholder="Enter item name">
+
+            <label>Category</label>
+            <select id="itemCategory" required>
+                <option value="">Select Category</option>
+                <option>Electronics</option>
+                <option>Books & Notes</option>
+                <option>Bags</option>
+                <option>Identity Cards</option>
+                <option>Accessories</option>
+                <option>Keys</option>
+                <option>Other</option>
+            </select>
+
+            <label>Campus Location</label>
+            <select id="itemLocation" required>
+                <option value="">Select Location</option>
+                <option>Library</option>
+                <option>Classroom</option>
+                <option>Computer Lab</option>
+                <option>Canteen</option>
+                <option>Sports Ground</option>
+                <option>Parking Area</option>
+                <option>Hostel</option>
+                <option>Other</option>
+            </select>
+
+            <label>Date</label>
+            <input type="date" id="itemDate" required>
+
+            <label>Description</label>
+            <textarea id="itemDescription" rows="4" required placeholder="Describe your item..."></textarea>
+
+            <label>Image URL (Optional)</label>
+            <input type="url" id="itemImage" placeholder="Paste image URL">
+
+            <button class="btn primary-btn full-btn">Submit Report</button>
+
+        </form>
+
+        <div class="side-info">
+            <div class="big-icon">🔎</div>
+            <h2>Help Your Campus</h2>
+            <p>Provide accurate information so that the right person can identify their belongings.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BROWSE ITEMS PAGE -->
+<section id="browse" class="page">
+
+    <div class="page-heading">
+        <div>
+            <span class="tag">COMMUNITY BOARD</span>
+            <h1>Lost & Found Items</h1>
+            <p>Explore items reported by students.</p>
+        </div>
+
+        <button class="btn primary-btn" onclick="checkLogin('report')">
+            + Report Item
+        </button>
+    </div>
+
+    <div class="filters">
+        <input type="text" id="searchInput" placeholder="Search item name...">
+
+        <select id="typeFilter">
+            <option value="All">All Types</option>
+            <option value="Lost">Lost</option>
+            <option value="Found">Found</option>
+        </select>
+
+        <select id="categoryFilter">
+            <option value="All">All Categories</option>
+            <option>Electronics</option>
+            <option>Books & Notes</option>
+            <option>Bags</option>
+            <option>Identity Cards</option>
+            <option>Accessories</option>
+            <option>Keys</option>
+            <option>Other</option>
+        </select>
+    </div>
+
+    <div class="item-grid" id="itemGrid"></div>
+
+</section>
+
+
+<!-- ITEM DETAILS PAGE -->
+<section id="details" class="page">
+
+    <button class="text-btn" onclick="showPage('browse')">← Back to Items</button>
+
+    <div id="itemDetails" class="panel"></div>
+
+</section>
+
+
+<!-- HELP REQUEST PAGE -->
+<section id="help" class="page">
+
+    <div class="page-heading">
+        <div>
+            <span class="tag">CAMPUS SUPPORT</span>
+            <h1>Get Campus Help</h1>
+            <p>Submit complaints about college facilities.</p>
+        </div>
+    </div>
+
+    <div class="form-layout">
+
+        <form id="helpForm" class="panel">
+
+            <h2>Submit Help Request</h2>
+
+            <label>Request Category</label>
+            <select id="helpCategory" required>
+                <option value="">Select Category</option>
+                <option>Wi-Fi / Internet</option>
+                <option>Classroom</option>
+                <option>Lab Equipment</option>
+                <option>Electricity</option>
+                <option>Water Supply</option>
+                <option>Cleanliness</option>
+                <option>Other</option>
+            </select>
+
+            <label>Location</label>
+            <input type="text" id="helpLocation" required placeholder="Enter location">
+
+            <label>Description</label>
+            <textarea id="helpDescription" rows="5" required placeholder="Explain your problem..."></textarea>
+
+            <button class="btn primary-btn full-btn">Submit Request</button>
+
+        </form>
+
+        <div class="side-info">
+            <div class="big-icon">💬</div>
+            <h2>We're Here To Help</h2>
+            <p>Report campus issues and keep track of their progress.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MY REPORTS PAGE -->
+<section id="reports" class="page">
+
+    <div class="page-heading">
+        <div>
+            <span class="tag">MY ACTIVITY</span>
+            <h1>My Reports</h1>
+            <p>View your submitted reports and requests.</p>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2>My Item Reports</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Type</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="myItemsTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2>My Help Requests</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Location</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="myHelpTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- ADMIN DASHBOARD -->
+<section id="admin" class="page">
+
+    <div class="page-heading">
+        <div>
+            <span class="tag">ADMINISTRATION</span>
+            <h1>Admin Dashboard</h1>
+            <p>Manage campus reports and requests.</p>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <span>📋</span>
+            <h2 id="adminItems">0</h2>
+            <p>Total Reports</p>
+        </div>
+
+        <div class="dashboard-card">
+            <span>💬</span>
+            <h2 id="adminHelp">0</h2>
+            <p>Help Requests</p>
+        </div>
+
+        <div class="dashboard-card">
+            <span>👥</span>
+            <h2 id="adminUsers">0</h2>
+            <p>Registered Users</p>
+        </div>
+
+        <div class="dashboard-card">
+            <span>✓</span>
+            <h2 id="adminResolved">0</h2>
+            <p>Resolved Items</p>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2>Manage Item Reports</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Reporter</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Update Status</th>
+                    </tr>
+                </thead>
+                <tbody id="adminItemsTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2>Manage Help Requests</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Student</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody id="adminHelpTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+
+</main>
+
+<footer>
+    <h2>Campus<span>Connect</span></h2>
+    <p>Connecting students. Helping students.</p>
+    <p>© 2026 CampusConnect | Web Technology Mini Project</p>
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
